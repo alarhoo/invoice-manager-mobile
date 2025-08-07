@@ -76,7 +76,7 @@ const DashboardScreen = () => {
   }
 
   return (
-    <ScrollView style={[styles.container, { paddingTop: insets.top }]} contentContainerStyle={styles.contentContainer}>
+    <ScrollView style={[styles.container, { paddingTop: insets.tops }]} contentContainerStyle={styles.contentContainer}>
       {/* KPIs Section */}
       <Text variant='headlineSmall' style={styles.sectionTitle}>
         Business Overview
@@ -213,7 +213,6 @@ const DashboardScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   contentContainer: {
     padding: 16,
@@ -231,7 +230,6 @@ const styles = StyleSheet.create({
   },
   kpiCard: {
     flex: 1,
-    elevation: 2,
   },
   kpiContent: {
     alignItems: 'center',
@@ -246,11 +244,9 @@ const styles = StyleSheet.create({
   },
   listCard: {
     marginBottom: 16,
-    elevation: 2,
   },
   chartCard: {
     marginBottom: 16,
-    elevation: 2,
   },
   chart: {
     marginVertical: 8,

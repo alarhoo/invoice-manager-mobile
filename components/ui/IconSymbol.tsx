@@ -16,6 +16,7 @@ type IconSymbolName = keyof typeof MAPPING
 const MAPPING = {
   'house.fill': 'home',
   'dashboard.fill': 'dashboard',
+  'box.fill': 'inventory',
   receipt: 'receipt',
   'people.fill': 'people',
   'request_quote.fill': 'request-quote',
