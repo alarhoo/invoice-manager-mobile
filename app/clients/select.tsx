@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
-import { Appbar, Button, Card, Searchbar, Text } from 'react-native-paper'
+import { Button, Card, Searchbar, Text } from 'react-native-paper'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 interface Client {
@@ -63,9 +63,13 @@ const ClientSelectionScreen = () => {
   )
 
   const handleClientSelect = (client: Client) => {
-    // TODO: Pass selected client back to invoice screen
-    console.log('Selected client for invoice:', client)
-    router.back()
+    // Pass selected client back to invoice screen via router params
+    router.push({
+      pathname: '/(tabs)/invoices/add',
+      params: {
+        selectedClient: JSON.stringify(client),
+      },
+    })
   }
 
   const handleAddNewClient = () => {
@@ -94,12 +98,7 @@ const ClientSelectionScreen = () => {
   )
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => router.back()} />
-        <Appbar.Content title='Select Client' />
-      </Appbar.Header>
-
+    <View style={[styles.container]}>
       <View style={styles.content}>
         <Searchbar
           placeholder='Search clients...'
@@ -138,7 +137,6 @@ const ClientSelectionScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   content: {
     flex: 1,
@@ -156,7 +154,6 @@ const styles = StyleSheet.create({
   },
   clientCard: {
     elevation: 2,
-    backgroundColor: '#fff',
   },
   clientHeader: {
     flexDirection: 'row',
