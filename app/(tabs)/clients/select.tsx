@@ -63,8 +63,8 @@ const ClientSelectionScreen = () => {
   )
 
   const handleClientSelect = (client: Client) => {
-    // Pass selected client back to invoice screen via router params
-    router.push({
+    // Pass selected client back to invoice screen and replace to keep back stack clean
+    router.replace({
       pathname: '/(tabs)/invoices/add',
       params: {
         selectedClient: JSON.stringify(client),
@@ -73,7 +73,7 @@ const ClientSelectionScreen = () => {
   }
 
   const handleAddNewClient = () => {
-    router.push('/clients/add')
+    router.push('/(tabs)/clients/add')
   }
 
   const renderClientItem = ({ item }: { item: Client }) => (

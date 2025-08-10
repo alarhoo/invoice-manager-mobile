@@ -10,6 +10,12 @@ export default function TabLayout() {
         }}
       />
       <Stack.Screen
+        name='select'
+        options={{
+          title: 'Select Client',
+        }}
+      />
+      <Stack.Screen
         name='add'
         options={{
           title: 'Add Client',

@@ -210,11 +210,11 @@ const InvoiceAdd = () => {
   }
 
   const handleAddItems = () => {
-    router.push('/items/select')
+    router.push('/(tabs)/items/select')
   }
 
   const handleSelectClient = () => {
-    router.push('/clients/select')
+    router.push('/(tabs)/clients/select')
   }
 
   const handlePhonePress = (phoneNumber: string) => {

@@ -1,4 +1,4 @@
-import { Estimate, getEstimates, subscribe } from '@/lib/estimatesStore'
+import { Estimate, addEstimate, getEstimates, subscribe } from '@/lib/estimatesStore'
 import { Stack, useRouter } from 'expo-router'
 import React from 'react'
 import { FlatList, RefreshControl, View } from 'react-native'
@@ -13,6 +13,33 @@ const Estimates = () => {
   React.useEffect(() => {
     return subscribe(setItems)
   }, [])
+
+  // Seed some dummy data if empty (layout-only concern for demo)
+  React.useEffect(() => {
+    if (items.length === 0) {
+      const now = new Date()
+      const demo: Estimate = {
+        estimateId: `EST-${now.getTime()}`,
+        title: 'Website Redesign',
+        selectedClient: { id: 'c1', name: 'Acme Corp' },
+        estimateDate: now,
+        expiryDate: new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000),
+        lineItems: [
+          { id: 'li1', name: 'Design', quantity: 1, price: 1200, itemDiscount: 0, total: 1200 },
+          { id: 'li2', name: 'Development', quantity: 1, price: 2800, itemDiscount: 0, total: 2800 },
+        ],
+        discount: { type: 'flat', value: 0 },
+        tax: { name: 'VAT', value: 10 },
+        shipping: 0,
+        subtotal: 4000,
+        total: 4400,
+        status: 'draft',
+        createdAt: now,
+        updatedAt: now,
+      }
+      addEstimate(demo)
+    }
+  }, [items.length])
 
   const filtered = React.useMemo(() => {
     if (!search.trim()) return items
@@ -52,7 +79,11 @@ const Estimates = () => {
                 right={(p) => (
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={{ marginRight: 8 }}>{new Date(item.estimateDate).toLocaleDateString()}</Text>
-                    <IconButton {...p} icon='chevron-right' onPress={() => {}} />
+                    <IconButton
+                      {...p}
+                      icon='chevron-right'
+                      onPress={() => router.push(`/(tabs)/estimate/${item.estimateId}`)}
+                    />
                   </View>
                 )}
               />

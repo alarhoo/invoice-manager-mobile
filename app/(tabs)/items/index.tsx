@@ -60,10 +60,7 @@ const ItemsList = () => {
   const formatCurrency = (amount: number) => `$${amount.toFixed(2)}`
 
   const handleItemSelect = (item: Item) => {
-    // Navigate back to invoice with selected item
-    // You would pass the item data back to the invoice screen
-    console.log('Selected item:', item)
-    router.back()
+    router.push(`/(tabs)/items/${item.id}`)
   }
 
   const renderItem = ({ item }: { item: Item }) => (
@@ -95,7 +92,12 @@ const ItemsList = () => {
     <View style={[styles.container, { paddingTop: insets.top }]}>
       {/* Create New Item Button */}
       <View style={styles.header}>
-        <Button mode='contained' onPress={() => router.push('/items/add')} icon='plus' style={styles.createButton}>
+        <Button
+          mode='contained'
+          onPress={() => router.push('/(tabs)/items/add')}
+          icon='plus'
+          style={styles.createButton}
+        >
           Create New Item
         </Button>
       </View>

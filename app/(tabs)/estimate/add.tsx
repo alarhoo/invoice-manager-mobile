@@ -123,7 +123,7 @@ const AddEstimate = () => {
             description={draft.selectedClient?.email || undefined}
             left={(p) => <List.Icon {...p} icon='account' />}
             right={(p) => <IconButton {...p} icon='chevron-right' />}
-            onPress={() => router.push('/clients/select')}
+            onPress={() => router.push('/(tabs)/clients/select')}
           />
         </Card.Content>
       </Card>
@@ -175,7 +175,7 @@ const AddEstimate = () => {
       <Card style={{ marginBottom: 12 }}>
         <Card.Title
           title='Items'
-          right={(p) => <IconButton {...p} icon='plus' onPress={() => router.push('/items/select')} />}
+          right={(p) => <IconButton {...p} icon='plus' onPress={() => router.push('/(tabs)/items/select')} />}
         />
         <Card.Content>
           {draft.lineItems.map((li) => (

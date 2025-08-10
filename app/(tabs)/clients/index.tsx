@@ -12,7 +12,7 @@ interface Client {
   address: string
 }
 
-const ClientSelection = () => {
+const ClientList = () => {
   const insets = useSafeAreaInsets()
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
@@ -63,13 +63,11 @@ const ClientSelection = () => {
   )
 
   const handleClientSelect = (client: Client) => {
-    // For now, just navigate back - later this will pass the selected client back
-    console.log('Selected client:', client)
-    router.back()
+    router.push(`/(tabs)/clients/${client.id}`)
   }
 
   const handleAddNewClient = () => {
-    router.push('/clients/add')
+    router.push('/(tabs)/clients/add')
   }
 
   const renderClientItem = ({ item }: { item: Client }) => (
@@ -199,4 +197,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default ClientSelection
+export default ClientList

@@ -94,9 +94,8 @@ const ItemSelectionScreen = () => {
   )
 
   const handleItemSelect = (item: Item) => {
-    // Pass selected item back to invoice screen via router params
-    // Add timestamp to ensure each selection is unique
-    router.push({
+    // Pass selected item back to invoice screen via router params and replace to keep stack clean
+    router.replace({
       pathname: '/(tabs)/invoices/add',
       params: {
         selectedItem: JSON.stringify(item),
@@ -106,7 +105,7 @@ const ItemSelectionScreen = () => {
   }
 
   const handleAddNewItem = () => {
-    router.push('/items/add')
+    router.push('/(tabs)/items/add')
   }
 
   const formatCurrency = (amount: number) => `$${amount.toFixed(2)}`
