@@ -12,8 +12,10 @@ export default function TabLayout() {
   const colorScheme = useColorScheme()
   const pathname = usePathname()
 
-  // Hide tab bar on specific screens
-  const hideTabBar = pathname.includes('/invoices/') && !pathname.endsWith('/invoices')
+  // Hide tab bar on specific nested screens (invoices and estimates inner routes)
+  const hideTabBar =
+    (pathname.includes('/invoices/') && !pathname.endsWith('/invoices')) ||
+    (pathname.includes('/estimate/') && !pathname.endsWith('/estimate'))
 
   return (
     <Tabs

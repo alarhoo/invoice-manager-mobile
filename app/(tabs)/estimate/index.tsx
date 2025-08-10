@@ -1,11 +1,72 @@
-import { Text, View } from 'react-native'
+import { Estimate, getEstimates, subscribe } from '@/lib/estimatesStore'
+import { Stack, useRouter } from 'expo-router'
+import React from 'react'
+import { FlatList, RefreshControl, View } from 'react-native'
+import { Card, IconButton, List, Searchbar, Text } from 'react-native-paper'
 
 const Estimates = () => {
-	return (
-		<View>
-			<Text>Estimates</Text>
-		</View>
-	)
+  const router = useRouter()
+  const [search, setSearch] = React.useState('')
+  const [items, setItems] = React.useState<Estimate[]>(getEstimates())
+  const [refreshing, setRefreshing] = React.useState(false)
+
+  React.useEffect(() => {
+    return subscribe(setItems)
+  }, [])
+
+  const filtered = React.useMemo(() => {
+    if (!search.trim()) return items
+    const q = search.toLowerCase()
+    return items.filter((e) =>
+      [e.title, e.estimateId, e.selectedClient?.name].some((v) => (v || '').toLowerCase().includes(q))
+    )
+  }, [items, search])
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Stack.Screen
+        options={{
+          title: 'Estimates',
+          headerRight: () => (
+            <View style={{ flexDirection: 'row' }}>
+              <IconButton icon='magnify' onPress={() => {}} disabled />
+              <IconButton icon='plus' onPress={() => router.push('/(tabs)/estimate/add')} />
+            </View>
+          ),
+        }}
+      />
+
+      <Searchbar placeholder='Search' value={search} onChangeText={setSearch} style={{ margin: 12 }} />
+
+      <FlatList
+        data={filtered}
+        keyExtractor={(item) => item.estimateId}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => setRefreshing(false)} />}
+        renderItem={({ item }) => (
+          <Card style={{ marginHorizontal: 12, marginBottom: 12 }}>
+            <Card.Content>
+              <List.Item
+                title={item.title || item.estimateId}
+                description={item.selectedClient?.name || 'No client'}
+                left={(p) => <List.Icon {...p} icon='file-document-edit-outline' />}
+                right={(p) => (
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ marginRight: 8 }}>{new Date(item.estimateDate).toLocaleDateString()}</Text>
+                    <IconButton {...p} icon='chevron-right' onPress={() => {}} />
+                  </View>
+                )}
+              />
+            </Card.Content>
+          </Card>
+        )}
+        ListEmptyComponent={() => (
+          <View style={{ padding: 24 }}>
+            <Text>There are no estimates yet.</Text>
+          </View>
+        )}
+      />
+    </View>
+  )
 }
 
 export default Estimates
