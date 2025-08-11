@@ -8,7 +8,7 @@ export default function TabLayout() {
       <Stack.Screen
         name='index'
         options={{
-          title: 'InvoiceLekka',
+          title: 'Lekkachara',
           headerRight: () => (
             <Avatar.Icon
               size={36}
