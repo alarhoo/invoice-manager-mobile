@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native'
-import { Avatar, Button, Card, Searchbar, Text } from 'react-native-paper'
+import { Avatar, Card, Text } from 'react-native-paper'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 interface Item {
@@ -89,9 +89,9 @@ const ItemsList = () => {
   )
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
+    <View style={[styles.container]}>
       {/* Create New Item Button */}
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Button
           mode='contained'
           onPress={() => router.push('/(tabs)/items/add')}
@@ -100,15 +100,15 @@ const ItemsList = () => {
         >
           Create New Item
         </Button>
-      </View>
+      </View> */}
 
       {/* Search Bar */}
-      <Searchbar
+      {/* <Searchbar
         placeholder='Search items...'
         onChangeText={setSearchQuery}
         value={searchQuery}
         style={styles.searchBar}
-      />
+      /> */}
 
       {/* Items List */}
       <FlatList
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   listContainer: {
-    paddingHorizontal: 16,
+    padding: 16,
   },
   itemCard: {
     marginBottom: 8,
