@@ -12,13 +12,16 @@ export default function TabLayout() {
     <Stack>
       <Stack.Screen
         name='index'
-        options={{
+        options={({ navigation }) => ({
           title: searchVisible ? '' : 'Invoices',
           headerTitle: searchVisible
             ? () => (
                 <Searchbar
                   placeholder='Search'
-                  onChangeText={setSearchQuery}
+                  onChangeText={(query) => {
+                    setSearchQuery(query)
+                    navigation.setParams({ searchQuery: query })
+                  }}
                   value={searchQuery}
                   style={{
                     flex: 1,
@@ -45,8 +48,7 @@ export default function TabLayout() {
               <IconButton icon='plus' iconColor='#fff' size={24} onPress={() => router.push('/invoices/add')} />
             </View>
           ),
-        }}
-        initialParams={{ searchQuery, setSearchQuery }}
+        })}
       />
       <Stack.Screen
         name='add'

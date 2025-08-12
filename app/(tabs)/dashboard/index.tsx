@@ -1,3 +1,4 @@
+import KpiCard from '@/components/KpiCard'
 import ClientsList from '@/components/lists/ClientsList'
 import InvoicesList from '@/components/lists/InvoicesList'
 import { KPIs, SalesRange, formatCurrency, getKPIs, getSalesTrend } from '@/lib/dashboardData'
@@ -199,22 +200,3 @@ const styles = StyleSheet.create({
 })
 
 export default DashboardScreen
-
-type KpiCardProps = { label: string; value: string | number; tone?: 'success' | 'warning' | 'error' }
-const KpiCard = ({ label, value, tone }: KpiCardProps) => {
-  const theme = useTheme()
-  const color =
-    tone === 'success' ? '#2e7d32' : tone === 'warning' ? '#f57c00' : tone === 'error' ? theme.colors.error : undefined
-  return (
-    <Card style={{ flexBasis: '48%', flexGrow: 1 }}>
-      <Card.Content style={{ alignItems: 'center', paddingVertical: 18 }}>
-        <Text variant='bodyLarge' style={{ opacity: 0.7, marginBottom: 6 }}>
-          {label}
-        </Text>
-        <Text variant='headlineMedium' style={{ fontWeight: 'bold', color }}>
-          {typeof value === 'number' ? value.toLocaleString() : value}
-        </Text>
-      </Card.Content>
-    </Card>
-  )
-}

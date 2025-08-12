@@ -2,7 +2,6 @@ import ClientsList from '@/components/lists/ClientsList'
 import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Button, Searchbar } from 'react-native-paper'
 
 const ClientList = () => {
   const router = useRouter()
@@ -11,7 +10,7 @@ const ClientList = () => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Searchbar
+        {/* <Searchbar
           placeholder='Search clients...'
           onChangeText={setSearchQuery}
           value={searchQuery}
@@ -25,7 +24,7 @@ const ClientList = () => {
           style={styles.addButton}
         >
           Add New Client
-        </Button>
+        </Button> */}
 
         <ClientsList search={searchQuery} onClientPress={(c) => router.push(`/(tabs)/clients/${c.id}`)} />
       </View>
