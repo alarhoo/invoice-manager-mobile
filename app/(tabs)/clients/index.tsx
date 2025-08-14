@@ -1,4 +1,5 @@
 import ClientsList from '@/components/lists/ClientsList'
+import { useAppContext } from '@/src/context/AppContext'
 import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
@@ -6,6 +7,8 @@ import { StyleSheet, View } from 'react-native'
 const ClientList = () => {
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
+  const { state } = useAppContext()
+  const clients = state.clients // Fetch clients from AppContext
 
   return (
     <View style={styles.container}>
@@ -26,7 +29,11 @@ const ClientList = () => {
           Add New Client
         </Button> */}
 
-        <ClientsList search={searchQuery} onClientPress={(c) => router.push(`/(tabs)/clients/${c.id}`)} />
+        <ClientsList
+          data={clients} // Pass clients data dynamically
+          search={searchQuery}
+          onClientPress={(c) => router.push(`/(tabs)/clients/${c.id}`)}
+        />
       </View>
     </View>
   )

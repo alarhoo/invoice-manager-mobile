@@ -1,3 +1,4 @@
+import { useAppContext } from '@/src/context/AppContext'
 import { useRouter } from 'expo-router'
 import React, { useState } from 'react'
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native'
@@ -16,40 +17,8 @@ const ItemsList = () => {
   const insets = useSafeAreaInsets()
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
-
-  // Mock items data - replace with actual Firestore data
-  const items: Item[] = [
-    {
-      id: '1',
-      name: 'Web Development',
-      description: 'Custom website development with responsive design',
-      price: 2500.0,
-    },
-    {
-      id: '2',
-      name: 'SEO Optimization',
-      description: 'Search engine optimization for 6 months',
-      price: 300.0,
-    },
-    {
-      id: '3',
-      name: 'Content Management',
-      description: 'Monthly content updates and maintenance',
-      price: 200.0,
-    },
-    {
-      id: '4',
-      name: 'Logo Design',
-      description: 'Professional logo design with multiple concepts',
-      price: 500.0,
-    },
-    {
-      id: '5',
-      name: 'Social Media Management',
-      description: 'Complete social media management package',
-      price: 800.0,
-    },
-  ]
+  const { state } = useAppContext()
+  const items = state.items // Fetch items from AppContext
 
   const filteredItems = items.filter(
     (item) =>
